@@ -45,3 +45,4 @@ VALIDATE $? "Starting of mySQL sever"
 
 mysql_secure_installation --set-root-pass ExpenseApp@1 &>> LOG_FILE
 VALIDATE $? "Set up of root password for mySQL"
+#
