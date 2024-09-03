@@ -43,5 +43,12 @@ VALIDATE $? "Enabling mySQL"
 systemctl start mysqld  &>> $LOG_FILE
 VALIDATE $? "Starting of mySQL sever"
 
-mysql_secure_installation --set-root-pass ExpenseApp@1 &>> $LOG_FILE
-VALIDATE $? "Set up of root password for mySQL"
+mysql -h mysql.ukom81s.online -u root -pExpenseApp@1 -e 'show databases;' &>> $LOG_FILE
+if [ $? -ne 0 ]
+then
+    echo "mysql root password not setup, stting now.." &>>LOG_FILE
+    mysql_secure_installation --set-root-pass ExpenseApp@1
+    VALIDATE $? "Set up of root password for mySQL"
+else
+    echo -e "mysql root password already setup..$Y SKIPPING $N" | tee -a $LOG_FILE
+fi
