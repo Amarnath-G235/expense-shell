@@ -14,7 +14,7 @@ N="\e[0m"
 Y="\e[33m"
 
 CHECK_ROOT(){
-    if [ $USERID -ne 0]
+    if [ $USERID -ne 0 ]
     then
        echo "Please run this script with root previleges" | tee -a $LOG_FILE
        exit 1
@@ -39,7 +39,7 @@ dnf list installed mysql
 if [ $? -ne 0 ]
 then
     echo "mysql is not installed..going to install it" | tee -a $LOG_FILE
-    dnf install mysql -y &>>$LOG_FILE
+    dnf install mysql-server -y &>>$LOG_FILE
     VALIDATE $? "Installing mysql server"
 else 
     echo "mysql is already installed.." | tee -a $LOG_FILE
