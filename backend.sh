@@ -64,3 +64,29 @@ rm -rf /app/* #removes existing code
 unzip /tmp/backend.zip &>>$LOG_FILE
 VALIDATE $? "Extracting backend application code"
 
+npm install &>>$LOG_FILE
+VALIDATE $? "Installing dependencies"
+
+cp /home/ec2-user/expense-shell/backend.service /etc/systemd/system/backend.service
+
+# load the data before running the backend
+dnf install mysql -y &>>$LOG_FILE
+VALIDATE $? "Installing mysql client"
+
+mysql -h mysql.ukom81s.online -u root -pExpenseApp@1 < /app/shema/backend.sql &>>$LOG_FILE
+VALIDATE $? "Schema loading"
+
+systemctl daemon-reload &>>$LOG_FILE
+VALIDATE $? "Daemon reloading"
+
+systemctl enable backend &>>$LOG_FILE
+VALIDATE $? "Enabling backend"
+
+systemctl restart backend &>>$LOG_FILE
+VALIDATE $? "Restarting backend"
+
+
+
+
+
+
