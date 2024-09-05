@@ -63,3 +63,7 @@ cd /app
 rm -rf /app/* # remove the existing code
 unzip /tmp/backend.zip &>> $LOG_FILE
 VALIDATE $? "Extracting backend application code"
+
+npm install &>>$LOG_FILE
+
+cp /home/ec2-user/expense-shell/backend.service /etc/systemd/system/backend.service
