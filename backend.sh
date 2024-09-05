@@ -43,6 +43,6 @@ VALIDATE $? "Enable nodejs:20"
 dnf install nodejs -y &>>$LOG_FILE
 VALIDATE $? "Installing nodejs"
 
-useradd expense
+useradd expense &>>$LOG_FILE
 VALIDATE $? "Creating user Expense"
 
