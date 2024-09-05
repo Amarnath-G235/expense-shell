@@ -44,5 +44,5 @@ dnf install nodejs -y &>>$LOG_FILE
 VALIDATE $? "Installing nodejs"
 
 useradd expense
-VALIDATE $? "Adding user Expense"
+VALIDATE $? "Creating user Expense"
 
